@@ -1,0 +1,66 @@
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  margin-top: 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.imgcarr {
+  width: 100vw;
+}
+
+.carousel-inner > div {
+  width: 100vw;
+  height: 450px;
+}
+
+.carousel-info {
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  left: 20%;
+  color: white;
+}
+
+.carousel-info > p {
+  font-size: 30px;
+}
+
+.carousel-info > h1 {
+  font-size: 50px;
+}
+
+.carousel-info > h1,
+.carousel-info > p {
+  text-shadow: -1px -1px 0 #000000, 1px -1px 0 #000000, -1px 1px 0 #000000,
+    1px 1px 0 #000000, -2px 0 0 #000000, 2px 0 0 #000000, 0 2px 0 #000000,
+    0 -2px 0 #000000;
+}
+
+.status-compra span {
+  font-size: 40px;
+}
+
+p > input {
+  width: 50px;
+}
+
+.dadoscartao {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.confirmacao > span {
+  font-size: 60px;
+  color: green;
+}
+
+.container {
+  margin-bottom: auto;
+}
