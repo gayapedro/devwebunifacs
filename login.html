@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="/js/scripts.js"></script>
+    <script src="./js/scripts.js"></script>
     <title>CompraCerta</title>
   </head>
   <body>
@@ -20,70 +20,74 @@
           <a class="navbar-brand" href="#">CompraCerta</a>
         </div>
         <ul class="nav navbar-nav">
-          <li><a href="/index.html">Home</a></li>
-          <li><a href="/produtos.html">Produtos</a></li>
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="./produtos.html">Produtos</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
+          
           <li class="not-signed">
-            <a href="/cadastro.html"
-              ><span class="glyphicon glyphicon-user"></span> Cadastro</a
-            >
-          </li>
-          <li class="not-signed">
-            <a href="/login.html"
+            <a href="./login.html"
               ><span class="glyphicon glyphicon-log-in"></span> Login</a
             >
           </li>
           <li class="signed">
-            <a href="/carrinho.html"
+            <a href="./carrinho.html"
               ><span class="glyphicon glyphicon-shopping-cart"></span>
               Carrinho</a
             >
           </li>
           <li class="signed">
-            <a href="/conta.html"
+            <a href="./conta.html"
               ><span class="glyphicon glyphicon-user"></span> Minha Conta</a
             >
           </li>
           <li class="signed">
-            <a class="" href="/index.html" onclick="signout()"
+            <a class="" href="./index.html" onclick="signout()"
               ><span class="glyphicon glyphicon-log-out"></span> Sair</a
             >
           </li>
         </ul>
       </div>
     </nav>
-    <div class="container col-md-8 centered col-md-offset-2">
-      <h1>Faça o seu login!</h1>
-      <br />
-      <form
-        id="formLogin"
-        action="/conta.html"
-        method="GET"
-        onsubmit="signin();"
-      >
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            required
-            type="email"
-            name="email"
-            class="form-control"
-            id="email"
-          />
-        </div>
-        <div class="form-group">
-          <label for="senha">Senha:</label>
-          <input
-            required
-            type="password"
-            name="senha"
-            class="form-control"
-            id="senha"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar</button>
-      </form>
+    <div class="container loginContainer">
+      <div class="col-md-5 loginBox">
+        <center><h1 class="center">Faça o seu login!</h1></center>
+        <br />
+        <form
+          id="formLogin"
+          action="./conta.html"
+          method="GET"
+          onsubmit="signin();"
+        >
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input
+              required
+              type="email"
+              name="email"
+              class="form-control"
+              id="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="senha">Senha:</label>
+            <input
+              required
+              type="password"
+              name="senha"
+              class="form-control"
+              id="senha"
+            />
+          </div>
+          <center>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <p class="lblRegister">
+              Não possuia uma conta?
+              <a href="./cadastro.html">Cadastre-se aqui</a>
+            </p>
+          </center>
+        </form>
+      </div>
     </div>
     <footer class="bg-light text-center text-lg-start">
       <div class="container p-4">
