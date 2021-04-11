@@ -82,3 +82,7 @@ p > input {
 .lblRegister {
   margin-top: 10px;
 }
+
+.registerBtn {
+  width: 200px
+}
