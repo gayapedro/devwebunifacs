@@ -64,3 +64,21 @@ p > input {
 .container {
   margin-bottom: auto;
 }
+
+.loginBox {
+  background-color: #f7f7f9;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.lblRegister {
+  margin-top: 10px;
+}
