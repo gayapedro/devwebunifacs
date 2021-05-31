@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
     <link
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -11,49 +10,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="./js/scripts.js"></script>
+    <link rel="stylesheet" href="../style.css" />
+    <script src="../js/scripts.js"></script>
     <title>CompraCerta</title>
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">CompraCerta</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li><a href="./index.html">Home</a></li>
-          <li><a href="./produtos.html">Produtos</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          
-          <li class="not-signed">
-            <a href="./login.html"
-              ><span class="glyphicon glyphicon-log-in"></span> Login</a
-            >
-          </li>
-          <li class="signed">
-            <a href="./carrinho.html"
-              ><span class="glyphicon glyphicon-shopping-cart"></span>
-              Carrinho</a
-            >
-          </li>
-          <li class="signed">
-            <a href="./conta.html"
-              ><span class="glyphicon glyphicon-user"></span> Minha Conta</a
-            >
-          </li>
-          <li class="signed">
-            <a class="" onclick="signout()" href="./index.html"
-              ><span class="glyphicon glyphicon-log-out"></span> Sair</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <?php include("nav.php"); ?>
     <h1 class="text-center">Dados de Pagamento</h1>
     <div class="container text-center dadoscartao">
       <div class="container col-md-4 text-right">
-        <form action="/confirmacao.html">
+        <form action="/confirmacao.php">
           <div class="form-group">
             <label for="numeroCartao">Número do Cartão</label>
             <input
@@ -125,40 +91,9 @@
         </form>
       </div>
       <div class="container col-md-8 text-left">
-        <img src="./assets/cartao.jpg" alt="cartao" />
+        <img src="../assets/cartao.jpg" alt="cartao" />
       </div>
     </div>
-
-    <footer class="bg-light text-center text-lg-start">
-      <div class="container p-4">
-        <div class="row">
-          <div class="col-md-8 text-left">
-            <h5 class="text-uppercase">CompraCerta</h5>
-
-            <p>
-              Somos um Super Mercado que se importa com você. Desde o cuidado na
-              seleção de produtos, separação até o envio para sua casa!
-              Conheça-nos!
-            </p>
-          </div>
-
-          <div class="col-md-4 text-right">
-            <h5 class="text-uppercase mb-0">Contato</h5>
-
-            <ul class="list-unstyled">
-              <li>
-                <p>Av. Paulo VI, 1230 - Pituba, Salvador - BA</p>
-              </li>
-              <li>
-                <p>(71) 3200-0800</p>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2021 Copyright: CompraCerta
-      </div>
-    </footer>
+    <?php include("footer.php"); ?>
   </body>
 </html>
