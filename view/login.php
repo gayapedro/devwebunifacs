@@ -21,32 +21,30 @@
         <br />
         <form
           id="formLogin"
-          action="./conta.php"
-          method="GET"
-          onsubmit="signin();"
+          method="POST"
         >
           <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="emailLogin">Email:</label>
             <input
               required
               type="email"
-              name="email"
+              name="emailLogin"
               class="form-control"
-              id="email"
+              id="emailLogin"
             />
           </div>
           <div class="form-group">
-            <label for="senha">Senha:</label>
+            <label for="senhaLogin">Senha:</label>
             <input
               required
               type="password"
-              name="senha"
+              name="senhaLogin"
               class="form-control"
-              id="senha"
+              id="senhaLogin"
             />
           </div>
           <center>
-            <button type="submit" class="btn btn-primary">Entrar</button>
+            <button type="submit" class="btn btn-primary" id="loginSubmit">Entrar</button>
             <p class="lblRegister">
               Não possuia uma conta?
               <a href="./cadastro.php">Cadastre-se aqui</a>

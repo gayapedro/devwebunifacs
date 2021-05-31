@@ -9,6 +9,7 @@ class Cliente extends ClienteModel {
     private $telefone;
     private $endereco;
     private $senha;
+    private $cpf;
     private $createdAt;
     private $updatedAt;
 
@@ -30,6 +31,9 @@ class Cliente extends ClienteModel {
     }
     public function setSenha($string){
         $this->senha = $string;
+    }
+    public function setCPF($string){
+        $this->cpf = $string;
     }
     public function setCreatedAt($string){
         $this->createdAt = $string;
@@ -57,6 +61,9 @@ class Cliente extends ClienteModel {
     public function getSenha(){
         return $this->senha;
     }
+    public function getCPF(){
+        return $this->cpf;
+    }
     public function getCreatedAt(){
         return $this->createdAt;
     }
@@ -66,7 +73,11 @@ class Cliente extends ClienteModel {
 
 
     public function incluir(){
-        return $this->setCliente($this->getEmail(),$this->getNome(),$this->getTelefone(),$this->getEndereco(),$this->getSenha(),$this->getEmail());
+        return $this->setCliente($this->getEmail(),$this->getNome(),$this->getTelefone(),$this->getEndereco(),$this->getSenha(),$this->getCPF());
+    }
+
+    public function signIn(){
+        return $this->login($this->getEmail(), $this->getSenha());
     }
 }
 ?>

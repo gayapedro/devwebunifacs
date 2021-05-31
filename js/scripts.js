@@ -22,12 +22,9 @@ function validaCadastro() {
   const cpf = $("#cpf").val();
   const cep = $("#cep").val();
   const logradouro = $("#logradouro").val();
-  const celular = $("#celular").val();
-  const senha = $("#pwd").val();
+  const celular = $("#telefone").val();
+  const senha = $("#senha").val();
   const confirmasenha = $("#pwdConf").val();
-  console.log(`cpf - ${cpf.length}`);
-  console.log(`cep - ${cep.length}`);
-  console.log(`celular - ${celular.length}`);
   if (cpf.length < 14 && cpf.length > 0) {
     errMsg.push("CPF inválido.");
   }
@@ -55,43 +52,37 @@ function atualizarValorCarrinho() {
   $("#valorTotal").text(textoValor);
 }
 
-function signin() {
-  document.cookie = "username=Teste";
-}
+$(document).ready(function() {
 
-function signout() {
-  document.cookie = "username=";
-}
-
-$(document).ready(function () {
   $(".signed").hide();
   $(".not-signed").show();
-});
-
-$(document).ready(function () {
   $("#divErros").hide();
-});
 
-$(document).ready(function () {
   var x = document.cookie;
-  const valorCookie = x.split("=");
-  if (valorCookie[1].length > 0) {
-    $(".signed").show();
-    $(".not-signed").hide();
+  if (x) {
+    const valorCookie = x.split("=");
+    if (valorCookie[1].length > 0) {
+      $(".signed").show();
+      $(".not-signed").hide();
+    } else {
+      $(".signed").hide();
+      $(".not-signed").show();
+    }
   } else {
     $(".signed").hide();
     $(".not-signed").show();
   }
-});
 
-function enableInputs() {
-  $("#logradouro").prop("disabled", "false");
-  $("#cidade").prop("disabled", "false");
-  $("#estado").prop("disabled", "false");
-}
+  if ($("#padrao").is(":checked")) {
+    $("#divnovoendereco").hide();
+    $("#cep").prop("required", false);
+    $("#logradouro").prop("required", false);
+    $("#complemento").prop("required", false);
+    $("#cidade").prop("required", false);
+    $("#estado").prop("required", false);
+  }
 
-$(document).ready(function () {
-  $("#formCadastro").submit(function (e) {
+  $("#form").submit(function (e) {
     const erros = validaCadastro();
     console.log(erros);
     $("#divErros").empty();
@@ -109,21 +100,47 @@ $(document).ready(function () {
       );
     } else {
       $("#divErros").hide();
-      alert("Cadastro realizado com sucesso!");
     }
   });
+
+  $("#loginSubmit").click(function (event) {
+    var formData = {
+      email: $("#emailLogin").val(),
+      senha: $("#senhaLogin").val(),
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "http://localhost/devwebunifacs/controller/cliente/LoginController.php",
+      data: formData,
+      dataType: "json",
+      encode: true,
+    })
+    .done(function(msg){
+      if (msg.email) {
+        document.cookie = `username=${msg.email}`;
+      } else {
+        alert("Erro ao fazer login.");
+      }
+    })
+    .fail(function(jqXHR, textStatus, msg){
+         alert(msg);
+    });
+
+    event.preventDefault();
+  });
+
 });
 
-$(document).ready(function () {
-  if ($("#padrao").is(":checked")) {
-    $("#divnovoendereco").hide();
-    $("#cep").prop("required", false);
-    $("#logradouro").prop("required", false);
-    $("#complemento").prop("required", false);
-    $("#cidade").prop("required", false);
-    $("#estado").prop("required", false);
-  }
-});
+function signout() {
+  document.cookie = "username=";
+}
+
+function enableInputs() {
+  $("#logradouro").prop("disabled", "false");
+  $("#cidade").prop("disabled", "false");
+  $("#estado").prop("disabled", "false");
+}
 
 function showNovoEndereco() {
   $("#divnovoendereco").show();

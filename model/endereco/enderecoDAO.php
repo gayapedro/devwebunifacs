@@ -5,20 +5,18 @@ class Endereco extends enderecoModel {
 
     private $id;
     private $numero;
-    private $bairro;
     private $cidade;
     private $uf;
     private $complemento;
+    private $cep;
+    private $logradouro;
 
     // Setters
     public function setId($string){
         $this->id = $string;
     }
-    public function setNumero($integer){
-        $this->numero = $integer;
-    }
-    public function setBairro($string){
-        $this->bairro = $string;
+    public function setNumero($string){
+        $this->numero = $string;
     }
     public function setCidade($string){
         $this->cidade = $string;
@@ -29,6 +27,12 @@ class Endereco extends enderecoModel {
     public function setComplemento($string){
         $this->complemento = $string;
     }
+    public function setCEP($string){
+        $this->cep = $string;
+    }
+    public function setLogradouro($string){
+        $this->logradouro = $string;
+    }
 
     //Getters
     public function getId(){
@@ -36,9 +40,6 @@ class Endereco extends enderecoModel {
     }
     public function getNumero(){
         return $this->numero;
-    }
-    public function getBairro(){
-        return $this->bairro;
     }
     public function getCidade(){
         return $this->cidade;
@@ -49,9 +50,15 @@ class Endereco extends enderecoModel {
     public function getComplemento(){
         return $this->complemento;
     }
+    public function getCEP(){
+        return $this->cep;
+    }
+    public function getLogradouro(){
+        return $this->logradouro;
+    }
 
 
     public function incluir(){
-        return $this->setEndereco($this->getNumero(),$this->getBairro(),$this->getCidade(),$this->getUF(),$this->getComplemento());
+        return $this->setEndereco($this->getNumero(),$this->getCidade(),$this->getUF(),$this->getComplemento(),$this->getCEP(),$this->getLogradouro());
     }
 }

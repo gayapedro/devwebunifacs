@@ -15,14 +15,18 @@ class EnderecoModel{
         $this->mysqli = new mysqli(BD_SERVIDOR, BD_USUARIO , BD_SENHA, BD_BANCO);
     }
 
-    public function setEndereco($numero, $bairro, $cidade, $uf, $complemento){
+    public function setEndereco($numero, $cidade, $uf, $complemento, $cep, $logradouro){
 
         $id = guidv4();
 
-        $stmt = $this->mysqli->prepare("INSERT INTO enderecos (`id`, `numero`, `bairro`, `cidade`, `uf`, `complemento`) VALUES (?,?,?,?,?,?)");
-        $stmt->bind_param("sissss",$id, $numero, $bairro, $cidade, $uf, $complemento);
+        console_log("$numero, $cidade, $uf, $complemento, $cep, $logradouro");
 
-        if ($stmt->execute()) {
+        $stmt = $this->mysqli->prepare("INSERT INTO enderecos (`id`, `numero`, `cidade`, `UF`, `complemento`, `cep`, `logradouro`) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param("sssssss",$id, $numero, $cidade, $uf, $complemento, $cep, $logradouro);
+
+        $result = $stmt->execute();
+
+        if ($result) {
             return $id;
         } else {
             return "";

@@ -1,4 +1,4 @@
-<form id="formCadastro" name="form-cadastro" action="" method="GET">
+<form id="form" name="form" action="../controller/cliente/CadastroController.php" method="post">
     <div class="container">
     <div class="col-md-6">
         <div class="form-group">
@@ -28,9 +28,9 @@
             required
             type="text"
             class="form-control"
-            id="celular"
+            id="telefone"
             onkeypress="$(this).mask('(00) 00000-0000');"
-            name="celular"
+            name="telefone"
         />
         </div>
         <div class="form-group">
@@ -44,13 +44,13 @@
         />
         </div>
         <div class="form-group">
-        <label for="pwd">Senha:</label>
+        <label for="senha">Senha:</label>
         <input
             required
             type="password"
             class="form-control"
-            id="pwd"
-            name="password"
+            id="senha"
+            name="senha"
         />
         </div>
         <div class="form-group">
@@ -95,6 +95,16 @@
         />
         </div>
         <div class="form-group">
+        <label for="numero">Numero:</label>
+        <input
+            required
+            type="text"
+            class="form-control"
+            id="numero"
+            name="numero"
+        />
+        </div>
+        <div class="form-group">
         <label for="complemento">Complemento:</label>
         <input
             required
@@ -133,7 +143,6 @@
             <button
             class="btn-primary form-control registerBtn"
             type="submit"
-            onclick="validaCadastro()"
             >
             Enviar
             </button>
