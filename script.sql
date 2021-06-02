@@ -1,15 +1,6 @@
 CREATE DATABASE IF NOT EXISTS loja;
 USE loja;
 
-CREATE TABLE IF NOT EXISTS sessions (
-    id VARCHAR(255) NOT NULL,
-    id_cliente VARCHAR(255) NOT NULL,
-    token VARCHAR(255) NOT NULL,
-    status VARCHAR(10) NOT NULL,
-    created_at DATE NOT NULL,
-PRIMARY KEY (id),
-FOREIGN KEY (id_cliente) REFERENCES clientes(id));
-
 CREATE TABLE IF NOT EXISTS enderecos (
     id VARCHAR(255) NOT NULL,
     numero VARCHAR(10) NOT NULL,
@@ -32,6 +23,15 @@ CREATE TABLE IF NOT EXISTS clientes (
     updated_at DATE NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_endereco) REFERENCES enderecos(id));
+
+CREATE TABLE IF NOT EXISTS sessions (
+    id VARCHAR(255) NOT NULL,
+    id_cliente VARCHAR(255) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    status VARCHAR(10) NOT NULL,
+    created_at DATE NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (id_cliente) REFERENCES clientes(id));
 
 CREATE TABLE IF NOT EXISTS carrinhos (
     id VARCHAR(255) NOT NULL,
