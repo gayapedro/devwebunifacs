@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS produtos (
     preco INTEGER NOT NULL,
     categoria VARCHAR(255) NOT NULL,
     desconto INTEGER NOT NULL,
+    image_url VARCHAR(255) NULL,
     created_at DATE NOT NULL,
 PRIMARY KEY (id));
 
