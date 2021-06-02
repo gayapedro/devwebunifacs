@@ -9,9 +9,9 @@ function buscarEnderecoPorCep() {
       $("#logradouro").val(response["logradouro"]);
       $("#cidade").val(response["cidade"]);
       $("#estado").val(response["uf"]);
-      $("#logradouro").prop("disabled", "true");
-      $("#cidade").prop("disabled", "true");
-      $("#estado").prop("disabled", "true");
+      $("#logradouro").prop("readonly", "true");
+      $("#cidade").prop("readonly", "true");
+      $("#estado").prop("readonly", "true");
     }
   };
   xhr.send(null);
@@ -54,24 +54,16 @@ function atualizarValorCarrinho() {
 
 $(document).ready(function() {
 
-  $(".signed").hide();
-  $(".not-signed").show();
+  const token = $.cookie("token");
+
   $("#divErros").hide();
 
-  var x = document.cookie;
-  if (x) {
-    const valorCookie = x.split("=");
-    if (valorCookie[1].length > 0) {
-      $(".signed").show();
-      $(".not-signed").hide();
-    } else {
-      $(".signed").hide();
-      $(".not-signed").show();
-    }
-  } else {
-    $(".signed").hide();
-    $(".not-signed").show();
-  }
+  [].forEach.call($(".signed"), function (el) {
+    el.style.visibility = token ? 'visible' : 'hidden';
+  });
+  [].forEach.call($(".not-signed"), function (el) {
+    el.style.visibility = token ? 'hidden' : 'visible';
+  });
 
   if ($("#padrao").is(":checked")) {
     $("#divnovoendereco").hide();
@@ -103,37 +95,16 @@ $(document).ready(function() {
     }
   });
 
-  $("#loginSubmit").click(function (event) {
-    var formData = {
-      email: $("#emailLogin").val(),
-      senha: $("#senhaLogin").val(),
-    };
-
-    $.ajax({
-      type: "POST",
-      url: "http://localhost/devwebunifacs/controller/cliente/LoginController.php",
-      data: formData,
-      dataType: "json",
-      encode: true,
-    })
-    .done(function(msg){
-      if (msg.email) {
-        document.cookie = `username=${msg.email}`;
-      } else {
-        alert("Erro ao fazer login.");
-      }
-    })
-    .fail(function(jqXHR, textStatus, msg){
-         alert(msg);
-    });
-
-    event.preventDefault();
-  });
-
 });
 
 function signout() {
-  document.cookie = "username=";
+  $.ajax({
+    type: "POST",
+    url: "../controller/cliente/LogoutController.php",
+    data: { token: $.cookie("token") },
+    dataType: "json",
+    encode: true,
+  });
 }
 
 function enableInputs() {

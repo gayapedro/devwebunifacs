@@ -40,6 +40,10 @@ class Session extends SessionModel {
         return $this->createSession($this->getIdCliente(),$this->getToken());
     }
 
+    public function deleteSession(){
+        return $this->expireSession($this->getToken());
+    }
+
     public function checkSession(){
         return $this->validateSession($this->getIdCliente(),$this->getToken());
     }

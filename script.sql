@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     id VARCHAR(255) NOT NULL,
     id_cliente VARCHAR(255) NOT NULL,
     token VARCHAR(255) NOT NULL,
+    status VARCHAR(10) NOT NULL,
     created_at DATE NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_cliente) REFERENCES clientes(id));

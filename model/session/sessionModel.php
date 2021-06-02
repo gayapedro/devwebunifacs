@@ -17,12 +17,21 @@ class SessionModel{
     public function createSession($idCliente, $token){
 
         $id = guidv4();
+        $status = "active";
 
-        $stmt = $this->mysqli->prepare("INSERT INTO sessions (`id`, `id_cliente`, `token`, `created_at`) VALUES (?,?,?,now())");
-        $stmt->bind_param("sss",$id, $idCliente, $token);
+        $stmt = $this->mysqli->prepare("INSERT INTO sessions (`id`, `id_cliente`, `token`, `status`, `created_at`) VALUES (?,?,?,?,now())");
+        $stmt->bind_param("ssss",$id, $idCliente, $token, $status);
 
         return $stmt->execute();
 
+    }
+
+    public function expireSession($token){
+
+        $stmt = $this->mysqli->prepare("UPDATE sessions SET status = 'expired' WHERE token = ?");
+        $stmt->bind_param("s", $token);
+
+        return $stmt->execute();
     }
 
     public function validateSession($idCliente, $token) {

@@ -16,9 +16,11 @@ class LoginController{
 
     private function login(){
 
-        $this->cliente->setEmail($_POST['email']);
-        $this->cliente->setSenha($_POST['senha']);
+        $this->cliente->setEmail($_POST['emailLogin']);
+        $this->cliente->setSenha($_POST['senhaLogin']);
         $result = $this->cliente->signIn();
+
+
 
         if ($result != "") {
             $token = bin2hex(random_bytes(40));
@@ -27,12 +29,15 @@ class LoginController{
             $sessionSaved = $this->session->newSession();
 
             if ($sessionSaved) {
-                return json_encode($this->sessiom);
+                setcookie('token',"$token",time()+2592000,"/");
+                header('Location:../../view/index.php', true,302);
             } else {
-                echo "";
+                header('Location:../../view/login.php', true,302);
             }
+        } else {
+            console_log("alert('Usuario ou senha invalidos')");
+            header('Location:../../view/login.php', true,302);
         }
-        echo "";
     }
 }
 // new LoginController($_GET['campo']);      // se for um controller que precisa de parametros
