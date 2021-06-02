@@ -47,5 +47,9 @@ class Session extends SessionDAO {
     public function checkSession(){
         return $this->validateSession($this->getIdCliente(),$this->getToken());
     }
+
+    public function getClienteIdFromToken(){
+        return $this->getClienteId($this->getToken());
+    }
 }
 ?>

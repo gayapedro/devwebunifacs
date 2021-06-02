@@ -79,5 +79,9 @@ class Cliente extends ClienteDAO {
     public function signIn(){
         return $this->login($this->getEmail(), $this->getSenha());
     }
+
+    public function getInfoConta(){
+        return $this->getContaInfo($this->getId());
+    }
 }
 ?>

@@ -3,6 +3,7 @@
 require_once(__DIR__."/../../init.php");
 require_once(__DIR__."/../../utils.php");
 require_once(__DIR__."/../endereco/enderecoModel.php");
+require_once("clienteInfoModel.php");
 class ClienteDAO{
 
     protected $mysqli;
@@ -47,14 +48,34 @@ class ClienteDAO{
 
     }
 
-    public function getClientes(){
-        $result = $this->mysqli->query("SELECT * FROM clientes");
+    public function getContaInfo($idCliente){
+
+        $stmt = $this->mysqli->prepare("SELECT * FROM clientes WHERE id = ?");
+        $stmt->bind_param("s", $idCliente);
+
+        $result = $stmt->execute();
+
         $array = [];
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             $array[] = $row;
         }
-        return $array;
 
+        if ($array[0]) {
+
+            $stmt2 = $this->mysqli->prepare("SELECT * FROM compras WHERE id_usuario = ?");
+            $stmt2->bind_param("s", $idCliente);
+
+            $result2 = $stmt2->execute();
+
+            $array2 = [];
+            while($row = $result2->fetch_array(MYSQLI_ASSOC)){
+                $array2[] = $row;
+            }
+
+            return new ClienteInfo($array[0], $array2);
+        }
+
+        return null;
     }
 
     // public function getClienteById(){

@@ -34,6 +34,21 @@ class SessionDAO{
         return $stmt->execute();
     }
 
+    public function getClienteId($token) {
+
+        $stmt = $this->mysqli->prepare("SELECT * FROM sessions WHERE token = ? AND status = 'active'");
+        $stmt->bind_param("s", $token);
+
+        $session = $stmt->execute();
+
+        console_log($session);
+
+        $idCliente = "";
+
+        return $idCliente;
+
+    }
+
     public function validateSession($idCliente, $token) {
 
         $sql = "SELECT * FROM sessions WHERE id_cliente = '$idCliente' AND token = '$token' ORDER BY created_at DESC";
