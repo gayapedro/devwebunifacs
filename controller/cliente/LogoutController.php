@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/../../model/session/sessionDAO.php");
+require_once(__DIR__."/../../model/session/sessionModel.php");
 require_once(__DIR__."/../../utils.php");
 class LogoutController{
 

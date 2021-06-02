@@ -1,47 +1,64 @@
 <?php
+require_once("enderecoDAO.php");
 
-require_once(__DIR__."/../../init.php");
-require_once(__DIR__."/../../utils.php");
+class Endereco extends enderecoDAO {
 
-class EnderecoModel{
+    private $id;
+    private $numero;
+    private $cidade;
+    private $uf;
+    private $complemento;
+    private $cep;
+    private $logradouro;
 
-    protected $mysqli;
-
-    public function __construct(){
-        $this->conexao();
+    // Setters
+    public function setId($string){
+        $this->id = $string;
+    }
+    public function setNumero($string){
+        $this->numero = $string;
+    }
+    public function setCidade($string){
+        $this->cidade = $string;
+    }
+    public function setUF($string){
+        $this->uf = $string;
+    }
+    public function setComplemento($string){
+        $this->complemento = $string;
+    }
+    public function setCEP($string){
+        $this->cep = $string;
+    }
+    public function setLogradouro($string){
+        $this->logradouro = $string;
     }
 
-    private function conexao(){
-        $this->mysqli = new mysqli(BD_SERVIDOR, BD_USUARIO , BD_SENHA, BD_BANCO);
+    //Getters
+    public function getId(){
+        return $this->id;
+    }
+    public function getNumero(){
+        return $this->numero;
+    }
+    public function getCidade(){
+        return $this->cidade;
+    }
+    public function getUF(){
+        return $this->uf;
+    }
+    public function getComplemento(){
+        return $this->complemento;
+    }
+    public function getCEP(){
+        return $this->cep;
+    }
+    public function getLogradouro(){
+        return $this->logradouro;
     }
 
-    public function setEndereco($numero, $cidade, $uf, $complemento, $cep, $logradouro){
 
-        $id = guidv4();
-
-        console_log("$numero, $cidade, $uf, $complemento, $cep, $logradouro");
-
-        $stmt = $this->mysqli->prepare("INSERT INTO enderecos (`id`, `numero`, `cidade`, `UF`, `complemento`, `cep`, `logradouro`) VALUES (?,?,?,?,?,?,?)");
-        $stmt->bind_param("sssssss",$id, $numero, $cidade, $uf, $complemento, $cep, $logradouro);
-
-        $result = $stmt->execute();
-
-        if ($result) {
-            return $id;
-        } else {
-            return "";
-        }
-    }
-
-    public function getEnderecoById($id){
-        $stmt = $this->mysqli->prepare("SELECT * FROM enderecos WHERE 'id' = ?");
-        $stmt->bind_param("s", $id);
-        $result = $stmt->execute();
-        $array = [];
-        while($row = $result->fetch_array(MYSQLI_ASSOC)){
-            $array[] = $row;
-        }
-        return $array;
+    public function incluir(){
+        return $this->setEndereco($this->getNumero(),$this->getCidade(),$this->getUF(),$this->getComplemento(),$this->getCEP(),$this->getLogradouro());
     }
 }
-?>

@@ -1,6 +1,6 @@
 <?php
-require_once(__DIR__."/../../model/cliente/clienteDAO.php");
-require_once(__DIR__."/../../model/endereco/enderecoDAO.php");
+require_once(__DIR__."/../../model/cliente/clienteModel.php");
+require_once(__DIR__."/../../model/endereco/enderecoModel.php");
 require_once(__DIR__."/../../utils.php");
 class CadastroController{
 

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__."/../../model/cliente/clienteDAO.php");
+require_once(__DIR__."/../../model/cliente/clienteModel.php");
 class ListaController{
 
     private $lista;

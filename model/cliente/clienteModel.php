@@ -1,82 +1,83 @@
 <?php
+require_once("clienteDAO.php");
 
-require_once(__DIR__."/../../init.php");
-require_once(__DIR__."/../../utils.php");
-require_once(__DIR__."/../endereco/enderecoDAO.php");
-class ClienteModel{
+class Cliente extends ClienteDAO {
 
-    protected $mysqli;
+    private $id;
+    private $email;
+    private $nome;
+    private $telefone;
+    private $endereco;
+    private $senha;
+    private $cpf;
+    private $createdAt;
+    private $updatedAt;
 
-    public function __construct(){
-        $this->conexao();
+    // Setters
+    public function setId($string){
+        $this->id = $string;
+    }
+    public function setEmail($string){
+        $this->email = $string;
+    }
+    public function setNome($string){
+        $this->nome = $string;
+    }
+    public function setTelefone($string){
+        $this->telefone = $string;
+    }
+    public function setEndereco($string){
+        $this->endereco = $string;
+    }
+    public function setSenha($string){
+        $this->senha = $string;
+    }
+    public function setCPF($string){
+        $this->cpf = $string;
+    }
+    public function setCreatedAt($string){
+        $this->createdAt = $string;
+    }
+    public function setUpdatedAt($string){
+        $this->updatedAt = $string;
     }
 
-    private function conexao(){
-        $this->mysqli = new mysqli(BD_SERVIDOR, BD_USUARIO , BD_SENHA, BD_BANCO);
+    //Getters
+    public function getId(){
+        return $this->id;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    public function getNome(){
+        return $this->nome;
+    }
+    public function getTelefone(){
+        return $this->telefone;
+    }
+    public function getEndereco(){
+        return $this->endereco;
+    }
+    public function getSenha(){
+        return $this->senha;
+    }
+    public function getCPF(){
+        return $this->cpf;
+    }
+    public function getCreatedAt(){
+        return $this->createdAt;
+    }
+    public function getUpdatedAt(){
+        return $this->updatedAt;
     }
 
-    public function setCliente($email, $nome, $telefone, $endereco, $senha, $cpf){
 
-        $id = guidv4();
-        $encSenha = password_hash($senha, PASSWORD_BCRYPT);
-
-        $stmt = $this->mysqli->prepare("INSERT INTO clientes (`id`, `email`, `nome`, `telefone`, `id_endereco`, `senha`, `cpf`, `created_at`, `updated_at`) VALUES (?,?,?,?,?,?,?, now(), now())");
-        $stmt->bind_param("sssssss",$id, $email, $nome, $telefone, $endereco, $encSenha, $cpf);
-
-        return $stmt->execute();
-
+    public function incluir(){
+        return $this->setCliente($this->getEmail(),$this->getNome(),$this->getTelefone(),$this->getEndereco(),$this->getSenha(),$this->getCPF());
     }
 
-    public function login($email, $senha) {
-
-        $sql = "SELECT * FROM clientes WHERE email = '$email'";
-        $result = $this->mysqli->query($sql);
-
-        if (!$result){
-            return false;
-        }
-
-        $row = $result->fetch_assoc();
-        $verify = password_verify($senha, $row['senha']);
-
-        if ($verify) {
-            return $row['id'];
-        }
-
-        return "";
-
+    public function signIn(){
+        return $this->login($this->getEmail(), $this->getSenha());
     }
-
-    public function getClientes(){
-        $result = $this->mysqli->query("SELECT * FROM clientes");
-        $array = [];
-        while($row = $result->fetch_array(MYSQLI_ASSOC)){
-            $array[] = $row;
-        }
-        return $array;
-
-    }
-
-    // public function getClienteById(){
-    //     $result = $this->mysqli->query("SELECT * FROM livros");
-    //     $array = [];
-    //     while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    //         $array[] = $row;
-    //     }
-    //     return $array;
-
-    // }
-
-    // public function getClienteByNome(){
-    //     $result = $this->mysqli->query("SELECT * FROM livros");
-    //     $array = [];
-    //     while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    //         $array[] = $row;
-    //     }
-    //     return $array;
-
-    // }
-
-    // function login
 }
 ?>
