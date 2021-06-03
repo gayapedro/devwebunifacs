@@ -90,9 +90,7 @@
 					$controlador = new ProdutoInitController();
 					$controlador->processaRequisicao(strtolower($url));
 				} else {
-					require "controller/home/InitController.php";
-					$controlador = new HomeInitController();
-					$controlador->processaRequisicao();
+					header('Location:404.php', true,302);
 				}
 				break;
 		}
