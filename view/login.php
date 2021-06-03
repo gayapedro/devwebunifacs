@@ -11,7 +11,7 @@
           id="formLogin"
           name="formLogin"
           method="POST"
-          action="../controller/cliente/LoginController.php"
+          action="signin"
         >
           <div class="form-group">
             <label for="emailLogin">Email:</label>

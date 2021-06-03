@@ -17,13 +17,13 @@ class LoginController{
         require "view/login.php";
     }
 
-    private function login(){
+    public function login(){
 
         $this->cliente->setEmail($_POST['emailLogin']);
         $this->cliente->setSenha($_POST['senhaLogin']);
         $result = $this->cliente->signIn();
 
-
+        console_log($result);
 
         if ($result != "") {
             $token = bin2hex(random_bytes(40));
@@ -33,13 +33,13 @@ class LoginController{
 
             if ($sessionSaved) {
                 setcookie('token',"$token",time()+2592000,"/");
-                header('Location:../../view/index.php', true,302);
+                header('Location:home', true,302);
             } else {
-                header('Location:../../view/login.php', true,302);
+                header('Location:login', true,302);
             }
         } else {
             console_log("alert('Usuario ou senha invalidos')");
-            header('Location:../../view/login.php', true,302);
+            header('Location:login', true,302);
         }
     }
 }

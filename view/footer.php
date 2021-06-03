@@ -5,7 +5,7 @@
         <h5 class="text-uppercase">CompraCerta</h5>
 
         <p>
-            Somos um Super Mercado que se importa com você. Desde o cuidado na
+            Somos um Supermercado que se importa com você. Desde o cuidado na
             seleção de produtos, separação até o envio para sua casa!
             Conheça-nos!
         </p>

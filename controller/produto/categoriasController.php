@@ -12,6 +12,16 @@ class CategoriasController{
         return $this->produto->getCategorias();
     }
 
+    public function getCategoriasNormalized(){
+        $cats = $this->produto->getCategorias();
+        $catsNorm = [];
+        foreach($cats as $cat) {
+            array_push($catsNorm, strtolower($cat['categoria']));
+        }
+
+        return $catsNorm;
+    }
+
 }
 
 ?>

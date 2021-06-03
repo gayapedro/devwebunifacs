@@ -61,4 +61,8 @@ class Endereco extends enderecoDAO {
     public function incluir(){
         return $this->setEndereco($this->getNumero(),$this->getCidade(),$this->getUF(),$this->getComplemento(),$this->getCEP(),$this->getLogradouro());
     }
+
+    public function getById() {
+        return $this->getEnderecoById($this->getId());
+    }
 }

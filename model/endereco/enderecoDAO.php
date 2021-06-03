@@ -34,14 +34,17 @@ class EnderecoDAO{
     }
 
     public function getEnderecoById($id){
-        $stmt = $this->mysqli->prepare("SELECT * FROM enderecos WHERE 'id' = ?");
-        $stmt->bind_param("s", $id);
-        $result = $stmt->execute();
+        $sql = "SELECT * FROM enderecos WHERE id = '$id'";
+        $result = $this->mysqli->query($sql);
+
+        console_log($sql);
+
         $array = [];
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             $array[] = $row;
         }
-        return $array;
+
+        return $array[0];
     }
 }
 ?>

@@ -7,20 +7,18 @@ class LogoutController{
 
     public function __construct(){
         $this->session = new Session();
-        $this->logout();
+        $this->processaRequisicao();
     }
 
-    private function logout(){
+    public function processaRequisicao(){
 
         $this->session->setToken($_POST['token']);
 
         $this->session->deleteSession();
 
         setcookie('token',"",time()+2592000,"/");
+        header('Location:home', true,302);
 
     }
 }
-// new LoginController($_GET['campo']);      // se for um controller que precisa de parametros
-new LogoutController();
-
 ?>

@@ -25,7 +25,7 @@
         >
         </li>
         <li class="signed">
-        <a class="" onclick="signout()" href="./login"
+        <a class="" href="./logout"
             ><span class="glyphicon glyphicon-log-out"></span> Sair</a
         >
         </li>

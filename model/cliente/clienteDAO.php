@@ -50,29 +50,31 @@ class ClienteDAO{
 
     public function getContaInfo($idCliente){
 
-        $stmt = $this->mysqli->prepare("SELECT * FROM clientes WHERE id = ?");
-        $stmt->bind_param("s", $idCliente);
-
-        $result = $stmt->execute();
+        $sql = "SELECT * FROM clientes WHERE id = '$idCliente'";
+        $result = $this->mysqli->query($sql);
 
         $array = [];
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             $array[] = $row;
         }
 
+        console_log($sql);
+
         if ($array[0]) {
 
-            $stmt2 = $this->mysqli->prepare("SELECT * FROM compras WHERE id_usuario = ?");
-            $stmt2->bind_param("s", $idCliente);
-
-            $result2 = $stmt2->execute();
+            $sql2 = "SELECT * FROM compras WHERE id_usuario = '$idCliente'";
+            $result2 = $this->mysqli->query($sql2);
 
             $array2 = [];
             while($row = $result2->fetch_array(MYSQLI_ASSOC)){
                 $array2[] = $row;
             }
 
-            return new ClienteInfo($array[0], $array2);
+            $endereco = new Endereco();
+            $endereco->setId($array[0]["id_endereco"]);
+            $enderecoData = $endereco->getById();
+
+            return new ClienteInfo($array[0], $enderecoData, $array2);
         }
 
         return null;

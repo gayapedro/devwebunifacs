@@ -16,7 +16,7 @@ class CadastroController{
         require "view/cadastro.php";
     }
 
-    private function cadastro(){
+    public function cadastro(){
 
         $this->endereco->setCEP($_POST['cep']);
         $this->endereco->setLogradouro($_POST['logradouro']);
@@ -36,7 +36,7 @@ class CadastroController{
         $result = $this->cliente->incluir();
 
         if($result >= 1){
-            echo "<script>alert('Cadastro incluído com sucesso!');document.location='../../view/login.php'</script>";
+            header('Location:login', true,302);
         }else{
             echo "<script>alert('Erro ao cadastrar o usuario!');history.back()</script>";
         }

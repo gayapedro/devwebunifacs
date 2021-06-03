@@ -1,12 +1,11 @@
 <?php
-    session_start();
 
 	if (isset($_GET['url'])) {
 		$url =  strtoupper($_GET['url']);
 
 		require "controller/produto/categoriasController.php";
 		$categoriasController = new CategoriasController();
-		$categoriasList = $categoriasController->getCategorias();
+		$categoriasList = $categoriasController->getCategoriasNormalized();
 
 		switch ($url){
 			case "HOME":
@@ -14,19 +13,30 @@
 				$controlador = new HomeInitController();
 				$controlador->processaRequisicao();
 			 	break;
-			case "PRODUTOS" || in_array($url, $categoriasList):
-				$categoria = "";
-				if($url != 'PRODUTOS'){
-					$categoria = strtolower($url);
-				}
+			case "PRODUTOS":
 				require "controller/produto/initController.php";
 				$controlador = new ProdutoInitController();
-				$controlador->processaRequisicao($categoria);
+				$controlador->processaRequisicao("");
 				break;
 			case "LOGIN":
+
+				if (isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
 				require "controller/cliente/loginController.php";
 				$controlador = new LoginController();
 				$controlador->processaRequisicao();
+				break;
+			case "SIGNIN":
+				require "controller/cliente/loginController.php";
+				$controlador = new LoginController();
+				$controlador->login();
+				break;
+			case "SIGNUP":
+				require "controller/cliente/CadastroController.php";
+				$controlador = new CadastroController();
+				$controlador->cadastro();
 				break;
 			case "CADASTRO":
 				require "controller/cliente/cadastroController.php";
@@ -34,40 +44,45 @@
 				$controlador->processaRequisicao();
 				break;
 			case "CONTA":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
 				require "controller/cliente/InfoContaController.php";
 				$controlador = new InfoContaController();
 				$controlador->processaRequisicao();
 				break;
-			// case "ADDITEMCARRINHO":
-			// 	require "Controller/ControladorAddItemCarrinho.php";
-			// 	require_once 'Model/CarrinhoSession.php';
-			// 	$carrinhoSession = new CarrinhoSession();
-			// 	$controlador = new ControladorAddItemCarrinho($carrinhoSession);
-			// 	$controlador->processaRequisicao();
-			// 	break;
-			// case "CARRINHO":
-			// 	require "Controller/ControladorListaCarrinho.php";
-			// 	$controlador = new ControladorListaCarrinho();
-			// 	$controlador->processaRequisicao();
-			// 	break;
-			// case "CARRINHOALTQUANT":
-			// 	require "Controller/ControladorAlteraQuantCarrinho.php";
-			// 	require_once 'Model/CarrinhoSession.php';
-			// 	$carrinhoSession = new CarrinhoSession();
-			// 	$controlador = new ControladorAlteraQuantCarrinho($carrinhoSession);
-			// 	$controlador->processaRequisicao();
-			// 	break;
-			// case "APAGAITEMCARRINHO":
-			// 	require "Controller/ControladorApagaItemCarrinho.php";
-			// 	require_once 'Model/CarrinhoSession.php';
-			// 	$carrinhoSession = new CarrinhoSession();
-			// 	$controlador = new ControladorApagaItemCarrinho($carrinhoSession);
-			// 	$controlador->processaRequisicao();
-			// 	break;
-			default:
-				require "controller/home/InitController.php";
-				$controlador = new HomeInitController();
+			case "CARRINHO":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/carrinho/CarrinhoController.php";
+				$controlador = new CarrinhoController();
 				$controlador->processaRequisicao();
+				break;
+			case "LOGOUT":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/cliente/LogoutController.php";
+				$controlador = new LogoutController();
+				$controlador->processaRequisicao();
+				break;
+			default:
+				if (in_array(strtolower($url), $categoriasList)) {
+					require "controller/produto/initController.php";
+					$controlador = new ProdutoInitController();
+					$controlador->processaRequisicao(strtolower($url));
+				} else {
+					require "controller/home/InitController.php";
+					$controlador = new HomeInitController();
+					$controlador->processaRequisicao();
+				}
 				break;
 		}
 	} else {

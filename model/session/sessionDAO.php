@@ -36,16 +36,15 @@ class SessionDAO{
 
     public function getClienteId($token) {
 
-        $stmt = $this->mysqli->prepare("SELECT * FROM sessions WHERE token = ? AND status = 'active'");
-        $stmt->bind_param("s", $token);
+        $sql = "SELECT id_cliente FROM sessions WHERE token = '$token' AND status = 'active'";
+        $result = $this->mysqli->query($sql);
 
-        $session = $stmt->execute();
+        $array = [];
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            $array[] = $row;
+        }
 
-        console_log($session);
-
-        $idCliente = "";
-
-        return $idCliente;
+        return $array[0]['id_cliente'];
 
     }
 

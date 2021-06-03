@@ -97,16 +97,6 @@ $(document).ready(function() {
 
 });
 
-function signout() {
-  $.ajax({
-    type: "POST",
-    url: "../controller/cliente/LogoutController.php",
-    data: { token: $.cookie("token") },
-    dataType: "json",
-    encode: true,
-  });
-}
-
 function enableInputs() {
   $("#logradouro").prop("disabled", "false");
   $("#cidade").prop("disabled", "false");

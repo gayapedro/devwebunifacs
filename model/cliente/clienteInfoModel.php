@@ -3,10 +3,12 @@
 class ClienteInfo {
 
     private $cliente;
+    private $endereco;
     private $compras;
 
-    function __construct($cliente, $compras) {
+    function __construct($cliente, $endereco, $compras) {
         $this->cliente = $cliente;
+        $this->endereco = $endereco;
         $this->compras = $compras;
     }
 
@@ -17,6 +19,9 @@ class ClienteInfo {
     public function setComrpas($array){
         $this->email = $array;
     }
+    public function setEndereco($endereco){
+        $this->endereco = $endereco;
+    }
 
     //Getters
     public function getCliente(){
@@ -24,6 +29,9 @@ class ClienteInfo {
     }
     public function getCompras(){
         return $this->compras;
+    }
+    public function getEndereco(){
+        return $this->endereco;
     }
 }
 ?>

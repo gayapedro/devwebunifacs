@@ -1,4 +1,4 @@
-<form id="form" name="form" action="../controller/cliente/CadastroController.php" method="post">
+<form id="form" name="form" action="signup" method="post">
     <div class="container">
     <div class="col-md-6">
         <div class="form-group">
