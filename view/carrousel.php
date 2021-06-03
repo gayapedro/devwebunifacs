@@ -1,9 +1,14 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-    <li data-target="#myCarousel" data-slide-to="1"></li>
-    <li data-target="#myCarousel" data-slide-to="2"></li>
+    <?php
+        $total = count($produtos);
+        for ($x = 0; $x < $total; $x++) {
+            $class = 'active';
+            if ($x > 0) $class = 'incative';
+            echo "<li data-target='#myCarousel' data-slide-to='$x' class='$class'></li>";
+        }
+    ?>
     </ol>
 
     <!-- Wrapper for slides -->

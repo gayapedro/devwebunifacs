@@ -5,7 +5,7 @@
     <?php include("nav.php"); ?>
     <div class="container">
       <h1>Carrinho</h1>
-      <form action="./endereco.php">
+      <form action="./endereco">
         <?php include("carrinhoProduto.php"); ?>
         <?php include("carrinhoProduto.php"); ?>
         <?php include("carrinhoProduto.php"); ?>

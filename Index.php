@@ -63,6 +63,17 @@
 				$controlador = new CarrinhoController();
 				$controlador->processaRequisicao();
 				break;
+
+			case "ENDERECO":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/endereco/EnderecoController.php";
+				$controlador = new EnderecoController();
+				$controlador->processaRequisicao();
+				break;
 			case "LOGOUT":
 
 				if (!isset($_COOKIE['token'])) {
