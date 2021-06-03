@@ -11,7 +11,10 @@ class LoginController{
     public function __construct(){
         $this->cliente = new Cliente();
         $this->session = new Session();
-        $this->login();
+    }
+
+    public function processaRequisicao(){
+        require "view/login.php";
     }
 
     private function login(){

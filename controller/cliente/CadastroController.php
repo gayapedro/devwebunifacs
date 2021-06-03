@@ -10,7 +10,10 @@ class CadastroController{
     public function __construct(){
         $this->cliente = new Cliente();
         $this->endereco = new Endereco();
-        $this->cadastro();
+    }
+
+    public function processaRequisicao(){
+        require "view/cadastro.php";
     }
 
     private function cadastro(){

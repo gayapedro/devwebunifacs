@@ -2,20 +2,21 @@
 <div class="media">
     <div class="media-left">
     <img
-        src="../assets/arroz.jpg"
+        src="<?php echo $item['image_url'] ?>"
         class="media-object"
-        style="height: 80px"
+        style="height: 80px; width: 80px;"
+        alt="<?php echo $item["nome"] ?>"
     />
     </div>
     <div class="media-body">
-    <h4 class="media-heading">Arroz Tio João 1kg</h4>
-    <p>Preço Unit.: R$ 5,49</p>
+    <h4 class="media-heading"><?php echo $item["nome"] ?></h4>
+    <p>Preço Unit.: R$ <?php echo round(($item['preco'] - ($item['preco'] * $item['desconto'] / 100))/100, 2) ?></p>
     <input
         hidden
         type="number"
         id="quantidade-produto1"
-        data-preco="5.49"
-        data-nome="Arroz Tio João 1kg"
+        data-preco="<?php echo round(($item['preco'] - ($item['preco'] * $item['desconto'] / 100))/100, 2) ?>"
+        data-nome="<?php echo $item["nome"] ?>"
         onchange="atualizarValorCarrinho()"
         value="0"
         min="0"

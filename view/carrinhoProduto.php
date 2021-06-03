@@ -1,7 +1,7 @@
 <div class="media">
     <div class="media-left">
     <img
-        src="../assets/arroz.jpg"
+        src="assets/arroz.jpg"
         class="media-object"
         style="width: 60px"
     />

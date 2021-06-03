@@ -9,17 +9,18 @@ class InfoContaController{
     public function __construct(){
         $this->cliente = new Cliente();
         $this->session = new Session();
-        $this->getContaInfo();
 
     }
 
-    private function getContaInfo(){
+    public function processaRequisicao(){
 
         $this->session->setToken($_POST['token']);
         $idCliente = $this->session->getClienteIdFromToken();
 
         $this->cliente->setId($idCliente);
-        return $this->cliente->getInfoConta();
+        $infoConta = $this->cliente->getInfoConta();
+
+        require "view/conta.php";
 
     }
 }

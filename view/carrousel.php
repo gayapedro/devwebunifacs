@@ -8,36 +8,25 @@
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-    <div class="item active">
-        <div class="carousel-info">
-        <h1>OFERTA!</h1>
-        <p>Tomate (kg)</p>
-        <p>R$20,00</p>
+        <?php
+            $first = true;
+            foreach($produtos as $item):
+        ?>
+        <div class="<?php if($first){
+                echo 'item active';
+                $first = false;
+            } else {
+                echo 'item';
+            }
+        ?>">
+            <div class="carousel-info">
+            <h1>OFERTA!</h1>
+            <p><?php echo $item['nome'] ?></p>
+            <p>R$ <?php echo round(($item['preco'] - ($item['preco'] * $item['desconto'] / 100))/100, 2) ?></p>
+            </div>
+            <img class="imgcarr" src="<?php echo $item['image_url'] ?>" alt="<?php echo $item['nome'] ?>" />
         </div>
-        <img class="imgcarr" src="../assets/tomate.jpg" alt="Tomate" />
-    </div>
-
-    <div class="item">
-        <div class="carousel-info">
-        <h1>OFERTA!</h1>
-        <p>Carne moída (kg)</p>
-        <p>R$30,00</p>
-        </div>
-        <img
-        class="imgcarr"
-        src="../assets/carnemoida.jpg"
-        alt="Carne Moída"
-        />
-    </div>
-
-    <div class="item">
-        <div class="carousel-info">
-        <h1>OFERTA!</h1>
-        <p>Banana (kg)</p>
-        <p>R$12,00</p>
-        </div>
-        <img class="imgcarr" src="../assets/banana.jpg" alt="Banana" />
-    </div>
+        <?php endforeach; ?>
     </div>
 
     <!-- Left and right controls -->
