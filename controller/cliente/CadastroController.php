@@ -35,6 +35,8 @@ class CadastroController{
         $this->cliente->setSenha($_POST['senha']);
         $result = $this->cliente->incluir();
 
+        console_log($result);
+
         if($result >= 1){
             header('Location:login', true,302);
         }else{

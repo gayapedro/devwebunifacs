@@ -83,5 +83,9 @@ class Cliente extends ClienteDAO {
     public function getInfoConta(){
         return $this->getContaInfo($this->getId());
     }
+
+    public function getEnderecoId() {
+        return $this->getIdEndereco($this->getId());
+    }
 }
 ?>

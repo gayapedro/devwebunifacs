@@ -23,8 +23,6 @@ class LoginController{
         $this->cliente->setSenha($_POST['senhaLogin']);
         $result = $this->cliente->signIn();
 
-        console_log($result);
-
         if ($result != "") {
             $token = bin2hex(random_bytes(40));
             $this->session->setToken($token);

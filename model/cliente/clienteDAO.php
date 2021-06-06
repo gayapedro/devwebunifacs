@@ -25,7 +25,6 @@ class ClienteDAO{
         $stmt->bind_param("sssssss",$id, $email, $nome, $telefone, $endereco, $encSenha, $cpf);
 
         return $stmt->execute();
-
     }
 
     public function login($email, $senha) {
@@ -58,8 +57,6 @@ class ClienteDAO{
             $array[] = $row;
         }
 
-        console_log($sql);
-
         if ($array[0]) {
 
             $sql2 = "SELECT * FROM compras WHERE id_usuario = '$idCliente'";
@@ -79,27 +76,18 @@ class ClienteDAO{
 
         return null;
     }
+    
+    public function getIdEndereco($id) {
 
-    // public function getClienteById(){
-    //     $result = $this->mysqli->query("SELECT * FROM livros");
-    //     $array = [];
-    //     while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    //         $array[] = $row;
-    //     }
-    //     return $array;
+        $sql = "SELECT id_endereco FROM clientes WHERE id = '$id'";
+        $result = $this->mysqli->query($sql);
 
-    // }
+        $array = [];
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            $array[] = $row;
+        }
 
-    // public function getClienteByNome(){
-    //     $result = $this->mysqli->query("SELECT * FROM livros");
-    //     $array = [];
-    //     while($row = $result->fetch_array(MYSQLI_ASSOC)){
-    //         $array[] = $row;
-    //     }
-    //     return $array;
-
-    // }
-
-    // function login
+        return $array[0]['id_endereco'];
+    }
 }
 ?>

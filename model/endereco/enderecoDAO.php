@@ -19,8 +19,6 @@ class EnderecoDAO{
 
         $id = guidv4();
 
-        console_log("$numero, $cidade, $uf, $complemento, $cep, $logradouro");
-
         $stmt = $this->mysqli->prepare("INSERT INTO enderecos (`id`, `numero`, `cidade`, `UF`, `complemento`, `cep`, `logradouro`) VALUES (?,?,?,?,?,?,?)");
         $stmt->bind_param("sssssss",$id, $numero, $cidade, $uf, $complemento, $cep, $logradouro);
 
@@ -36,8 +34,6 @@ class EnderecoDAO{
     public function getEnderecoById($id){
         $sql = "SELECT * FROM enderecos WHERE id = '$id'";
         $result = $this->mysqli->query($sql);
-
-        console_log($sql);
 
         $array = [];
         while($row = $result->fetch_array(MYSQLI_ASSOC)){

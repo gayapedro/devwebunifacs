@@ -1,22 +1,22 @@
 <div class="media">
     <div class="media-left">
     <img
-        src="assets/arroz.jpg"
+        src="<?php echo $item['image_url'] ?>"
         class="media-object"
         style="width: 60px"
     />
     </div>
     <div class="media-body">
-    <h4 class="media-heading">Arroz Tio João 1kg</h4>
+    <h4 class="media-heading"><?php echo $item['nome'] ?></h4>
     <p>
-        Preço Unit.: R$ 5,49 Qtd:
+        Preço Unit.: R$ <?php echo round($item['preco'] / 100, 2) ?> Qtd:
         <input
-        data-preco="5.49"
+        data-preco="<?php echo $item['preco'] ?>"
         required
         onchange="atualizarValorCarrinho()"
         name="quantidade1"
         type="number"
-        value="2"
+        value="<?php echo $item['cantidad'] ?>"
         />
     </p>
     </div>

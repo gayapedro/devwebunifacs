@@ -6,11 +6,14 @@
     <div class="container">
       <h1>Carrinho</h1>
       <form action="./endereco">
-        <?php include("components/carrinhoProduto.php"); ?>
-        <?php include("components/carrinhoProduto.php"); ?>
-        <?php include("components/carrinhoProduto.php"); ?>
+
+        <?php
+          foreach($currentCarrinhoProducts as $item):
+        ?>
+          <?php include("components/carrinhoProduto.php"); ?>
+        <?php endforeach; ?>
         <h2>Total</h2>
-        <h3 id="valorTotal">R$ 44,69</h3>
+        <h3 id="valorTotal">R$ <?php echo round($total / 100, 2) ?></h3>
         <button class="btn btn-primary">Finalizar Compra</button>
       </form>
     </div>

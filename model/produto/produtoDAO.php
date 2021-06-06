@@ -57,8 +57,6 @@ class ProdutoDAO{
             $array[] = $row;
         }
 
-        console_log($array);
-
         return $array;
     }
 }

@@ -16,9 +16,9 @@
             onclick="hideNovoEndereco();"
           />
           <label for="padrao">Endereço Cadastrado</label>
-          <p>Rua Afonso Ruy, 658 - Itaigara</p>
-          <p>Salvador - BA</p>
-          <p>CEP: 41.815-300</p>
+          <p><?php echo $enderecoData['logradouro'] ?></p>
+          <p><?php echo $enderecoData['cidade'] ?> - <?php echo $enderecoData['UF'] ?></p>
+          <p>CEP: <?php echo $enderecoData['cep'] ?></p>
         </div>
         <div class="form-group">
           <input
