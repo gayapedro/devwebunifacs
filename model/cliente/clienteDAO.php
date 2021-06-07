@@ -80,8 +80,6 @@ class ClienteDAO{
                     $array3[] = $row;
                 }
 
-                console_log($array3);
-
                 if ($array3[0]['processo'] > 0){
                     $array2[$x]['delivered'] = true;
                 } else {

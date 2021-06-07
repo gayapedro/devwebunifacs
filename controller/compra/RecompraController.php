@@ -29,9 +29,6 @@ class RecompraController{
 
         $newCarrinho = $this->carrinho->criarCarrinho();
 
-        console_log($newCarrinho);
-        console_log($compraInfo['products'] );
-
         foreach($compraInfo['products'] as $product) {
             $this->carrinhoProduto->setIdCarrinho($newCarrinho);
             $this->carrinhoProduto->setIdProduto($product['p_id']);

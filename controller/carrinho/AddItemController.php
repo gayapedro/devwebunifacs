@@ -20,8 +20,6 @@ class AddItemController{
         if (empty($currentCarrinho)) {
 
             $newCarrinho = $this->carrinho->criarCarrinho();
-            
-        console_log($newCarrinho);
 
             $this->carrinhoProduto->setIdCarrinho($newCarrinho);
             $this->carrinhoProduto->setIdProduto($_POST['idProduto']);

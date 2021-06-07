@@ -85,8 +85,7 @@ class CarrinhoDAO{
         ";
 
         $result = $this->mysqli->query($sql);
-        console_log($result);
-
+        
         $array = [];
         while($row = $result->fetch_array(MYSQLI_ASSOC)){
             $array[] = $row;

@@ -30,8 +30,6 @@ class CarrinhoProdutoDAO{
 
         $sql = "UPDATE carrinho_produto SET cantidad = $cantidad WHERE id = '$id'";
 
-        console_log($sql);
-
         return $this->mysqli->query($sql);
     }
 }

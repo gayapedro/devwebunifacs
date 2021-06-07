@@ -25,7 +25,6 @@ class ProcessoDAO{
         $stmt = $this->mysqli->prepare("INSERT INTO processos (`id`, `id_compra`, `status`, `stage`, `id_responsavel`, `ordem`, `created_at`, `updated_at`) VALUES (?,?,?,?,?,?, now(), now())");
         $stmt->bind_param("sssssi",$id, $idCompra, $status, $stage, $idResp, $ordem);
         $stmt->execute();
-        console_log($stmt->error);
 
         $id = guidv4();
         $status = "waiting";

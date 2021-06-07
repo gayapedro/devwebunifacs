@@ -26,7 +26,6 @@ class CompraDAO{
         $stmt->bind_param("sssss",$id, $idUsuario, $idEndereco, $idCarrinho, $qualificacao);
 
         $stmt->execute();
-        console_log($stmt->error);
 
         return $id;
 
@@ -49,7 +48,6 @@ class CompraDAO{
             $array[] = $row;
         }
 
-        console_log($array);
         return count($array) > 0 ? $array[0]['id'] : false;
     }
 

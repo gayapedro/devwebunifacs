@@ -1,3 +1,9 @@
+USE loja;
+
+DELETE * FROM carrinho_produto;
+DELETE * FROM carrinhos;
+DELETE * FROM produtos;
+
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('741cbd6d-445f-4053-80a8-7b1cdc4bd77c', 'Açougue', 3650, 'Bisteca 1Kg', 10, 'https://savegnago.vteximg.com.br/arquivos/ids/286978-600-600/BISTECA-SUINA-CARRE-KG-CONGELADA-EMBALAD.jpg', NOW());
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('1099d8de-8a13-44cc-bac5-e734998cb517', 'Açougue', 5145, 'File especial 1Kg', 0, 'https://bigdelivery-assets-sales-production.s3-sa-east-1.amazonaws.com/spree/images/854/large/File_Especial_4_%281_de_1%29.jpg', NOW());
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('dc7688de-f7d2-41a2-a765-6d59cc5b86ea', 'Açougue', 2135, 'Peito de frango 1Kg', 0, 'https://cdn.awsli.com.br/600x450/914/914004/produto/36267297/3e1fd2c76b.jpg', NOW());

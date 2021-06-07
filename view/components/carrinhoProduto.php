@@ -9,7 +9,7 @@
     />
     </div>
     <div class="media-body">
-    <h4 class="media-heading"><?php console_log($item); echo $item['nome'] ?></h4>
+    <h4 class="media-heading"><?php echo $item['nome'] ?></h4>
     <p>
         Preço Unit.: R$ <?php echo round($item['preco'] / 100, 2) ?> Qtd:
         <input
