@@ -15,6 +15,16 @@ class CompraController{
         // se nao existir, criar uma compra, um carrinho e adicionar o produto.
     }
 
+    public function getCompraInfo(){
+        console_log($_POST['idCompra']);
+        $this->compra->setId($_POST['idCompra']);
+        $compraInfo =  $this->compra->getCompraInfo();
+
+        console_log($compraInfo);
+
+        require "view/detalhepedido.php";
+    }
+
 }
 
 ?>

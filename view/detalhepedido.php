@@ -1,5 +1,77 @@
-<?php 
+<?php
   require "components/header.php";
+
+  function getColor($status) {
+
+    $color = '';
+
+    switch ($status) {
+      case 'waiting':
+        $color = 'grey';
+        break;
+      case 'doing':
+        $color = '#758cfa';
+        break;
+      case 'done':
+        $color = 'green';
+        break;
+      default:
+        $color = '';
+        break;
+    }
+
+    return $color;
+  }
+
+  function getIcon($stage) {
+
+    $icon = '';
+
+    switch ($stage) {
+      case 'inicial':
+        $icon = 'glyphicon-ok';
+        break;
+      case 'preparação':
+        $icon = 'glyphicon-shopping-cart';
+        break;
+      case 'embalagem':
+        $icon = 'glyphicon glyphicon-gift';
+        break;
+      case 'entrega':
+        $icon = 'glyphicon-send';
+        break;
+      default:
+        $icon = '';
+        break;
+    }
+
+    return $icon;
+  }
+
+  function getStageName($stage) {
+
+    $parsedStage = '';
+
+    switch ($stage) {
+      case 'inicial':
+        $parsedStage = 'Pedido Recebido';
+        break;
+      case 'preparação':
+        $parsedStage = 'Pedido Separado';
+        break;
+      case 'embalagem':
+        $parsedStage = 'Pedido Embalado';
+        break;
+      case 'entrega':
+        $parsedStage = 'Pedido Entregue';
+        break;
+      default:
+        $parsedStage = '';
+        break;
+    }
+
+    return $parsedStage;
+  }
 ?>
   <body>
     <?php include("components/nav.php"); ?>
@@ -7,79 +79,40 @@
       <h1>Detalhes da Compra</h1>
       <br />
       <div class="container text-center status-compra">
-        <div class="col-md-3 status-compra">
-          <span style="color: green" class="glyphicon glyphicon-ok"></span>
-          <p>Pedido Recebido</p>
-          <p>03/04/2021</p>
-          <p>09:07</p>
-        </div>
-        <div class="col-md-3 status-compra">
-          <span
-            style="color: green"
-            class="glyphicon glyphicon-shopping-cart"
-          ></span>
-          <p>Pedido Separado</p>
-          <p>03/04/2021</p>
-          <p>11:23</p>
-        </div>
-        <div class="col-md-3 status-compra">
-          <span style="color: green" class="glyphicon glyphicon-gift"></span>
-          <p>Pedido Embalado</p>
-          <p>03/04/2021</p>
-          <p>11:44</p>
-        </div>
-        <div class="col-md-3 status-compra">
-          <span style="color: green" class="glyphicon glyphicon-send"></span>
-          <p>Pedido Entregue</p>
-          <p>03/04/2021</p>
-          <p>13:20</p>
-        </div>
+        <?php foreach($compraInfo['processos'] as $item): ?>
+          <div class="col-md-3 status-compra">
+            <span style="color: <?php echo getColor($item['status']) ?>" class="glyphicon <?php echo getIcon($item['stage']) ?>"></span>
+            <p><?php echo getStageName($item['stage']) ?></p>
+            <?php if($item['status'] != 'waiting'): ?>
+              <p><?php $date = new DateTime($item['updated_at']); echo $date->format('d/m/Y') ?></p>
+              <p><?php $date = new DateTime($item['updated_at']); echo $date->format('H:i') ?></p>
+            <?php else: ?>
+              <p>Na espera</p>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
       </div>
 
       <h2>Itens</h2>
-
+      <?php foreach($compraInfo['products'] as $item): ?>
       <div class="media">
         <div class="media-left">
           <img
-            src="assets/arroz.jpg"
+            src="<?php echo $item['image_url'] ?>"
             class="media-object"
             style="width: 60px"
+            alt="<?php echo $item['nome'] ?>"
           />
         </div>
         <div class="media-body">
-          <h4 class="media-heading">Arroz Tio João 1kg</h4>
-          <p>Qtd: 2 Preço Unit.: R$ 5,49</p>
+          <h4 class="media-heading"><?php echo $item['nome'] ?></h4>
+          <p>Qtd: <?php echo $item['cantidad'] ?> Preço Unit.: R$ <?php echo round($item['preco'] / 100, 2) ?></p>
         </div>
       </div>
-      <div class="media">
-        <div class="media-left">
-          <img
-            src="assets/cafe.png"
-            class="media-object"
-            style="width: 60px"
-          />
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Café 3 Corações 500g</h4>
-          <p>Qtd: 3 Preço Unit.: R$ 8,74</p>
-        </div>
-      </div>
-      <div class="media">
-        <div class="media-left">
-          <img
-            src="assets/feijao.jpg"
-            class="media-object"
-            style="width: 60px"
-          />
-        </div>
-        <div class="media-body">
-          <h4 class="media-heading">Feijão Carioca Camil 1kg</h4>
-          <p>Qtd: 1 Preço Unit.: R$ 7,49</p>
-        </div>
-      </div>
+      <?php endforeach; ?>
       <h2>Total</h2>
-      <h3>R$ 44,69</h3>
-      <a href="./carrinho.php">
+      <h3>R$ <?php echo round($compraInfo['total'] / 100, 2) ?></h3>
+      <a href="./recompra">
         <button class="btn btn-primary" type="button">Comprar Novamente</button>
       </a>
     </div>

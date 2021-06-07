@@ -40,18 +40,6 @@ function validaCadastro() {
   return errMsg;
 }
 
-function atualizarValorCarrinho() {
-  let soma = 0;
-  $("input").each(function () {
-    let valor = parseFloat($(this).data("preco"));
-    soma += parseInt($(this).val()) * valor;
-  });
-  soma = soma.toFixed(2);
-  const somaTexto = `${soma}`.replace(".", ",");
-  const textoValor = `R$ ${somaTexto}`;
-  $("#valorTotal").text(textoValor);
-}
-
 $(document).ready(function() {
 
   const token = $.cookie("token");
@@ -97,6 +85,10 @@ $(document).ready(function() {
 
 });
 
+function goBack() {
+  window.location.href="./produtos";
+}
+
 function enableInputs() {
   $("#logradouro").prop("disabled", "false");
   $("#cidade").prop("disabled", "false");
@@ -119,25 +111,4 @@ function hideNovoEndereco() {
   $("#complemento").prop("required", false);
   $("#cidade").prop("required", false);
   $("#estado").prop("required", false);
-}
-
-function button1() {
-  $("#button1").hide();
-  $("#quantidade-produto1").show();
-  $("#quantidade-produto1").val(1);
-  atualizarValorCarrinho();
-}
-
-function button2() {
-  $("#button2").hide();
-  $("#quantidade-produto2").show();
-  $("#quantidade-produto2").val(1);
-  atualizarValorCarrinho();
-}
-
-function button3() {
-  $("#button3").hide();
-  $("#quantidade-produto3").show();
-  $("#quantidade-produto3").val(1);
-  atualizarValorCarrinho();
 }

@@ -69,4 +69,13 @@ class Carrinho extends CarrinhoDAO
     {
         return $this->fetchCarrinhoProducts($this->getId());
     }
+
+    public function deleteCarrinho(){
+        return $this->inactiveCarrinho($this->getToken());
+    }
+
+    public function closeCarrinho()
+    {
+        return $this->fecharCarrinho($this->getToken());
+    }
 }

@@ -10,22 +10,38 @@ class CarrinhoController{
 
     public function processaRequisicao(){
 
-        $this->carrinho->setToken($_COOKIE['token']);
-        $currentCarrinho = $this->carrinho->getCarrinho();
-        $this-> carrinho->setId($currentCarrinho['id']);
-        $currentCarrinhoProducts = $this->carrinho->getCarrinhoProducts();
-
+        $currentCarrinho = $this->getCurrentCarrinho();
         $total = 0;
-        foreach($currentCarrinhoProducts as $item) {
-            $total += $item['preco'] * $item['cantidad'];
+        $currentCarrinhoProducts = [];
+
+        if (!empty($currentCarrinho)) {
+            $currentCarrinhoProducts = $this->getCurrentCarrinhoProducts($currentCarrinho['id']);
+            $total = $this->getTotal($currentCarrinhoProducts);
         }
 
         require "view/carrinho.php";
     }
 
+    public function getTotal($currentCarrinhoProducts) {
+        $total = 0;
+        foreach($currentCarrinhoProducts as $item) {
+            $total += $item['preco'] * $item['cantidad'];
+        }
+        return $total;
+    }
+
+    public function getCurrentCarrinho() {
+        $this->carrinho->setToken($_COOKIE['token']);
+        return $this->carrinho->getCarrinho();
+    }
+
+    public function getCurrentCarrinhoProducts($id) {
+        $this-> carrinho->setId($id);
+        return $this->carrinho->getCarrinhoProducts();
+    }
+
     public function addItem() {
-        // check if carrinho exists
-        // 
+        header('Location:home', true,302);
     }
 
 }

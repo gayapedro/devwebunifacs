@@ -20,10 +20,16 @@ class CarrinhoDAO{
         $id = guidv4();
         $status = 'active';
 
-        $stmt = $this->mysqli->prepare("INSERT INTO clientes (`id`, `token`, `status`, `created_at`, `updated_at`) VALUES (?,?,?, now(), now())");
+        $stmt = $this->mysqli->prepare("INSERT INTO carrinhos (`id`, `token`, `status`, `created_at`, `updated_at`) VALUES (?,?,?, now(), now())");
         $stmt->bind_param("sss",$id, $token, $status);
 
-        return $stmt->execute();
+        $result = $stmt->execute();
+
+        if ($result) {
+            return $id;
+        } else {
+            return false;
+        }
 
     }
 
@@ -44,6 +50,20 @@ class CarrinhoDAO{
         return $array[0];
     }
 
+    public function inactiveCarrinho($token) {
+
+        $sql = "UPDATE carrinhos SET status = 'inactive', updated_at = NOW() WHERE token = '$token'";
+
+        return $this->mysqli->query($sql);
+    }
+
+    public function fecharCarrinho($token) {
+
+        $sql = "UPDATE carrinhos SET status = 'closed', updated_at = NOW() WHERE token = '$token'";
+
+        return $this->mysqli->query($sql);
+    }
+
     public function fetchCarrinhoProducts($id) {
 
         $sql = "
@@ -51,7 +71,8 @@ class CarrinhoDAO{
                 p.nome,
                 (p.preco - p.preco * p.desconto / 100) as preco,
                 p.image_url,
-                cp.cantidad
+                cp.cantidad,
+                cp.id as cp_id
             FROM
                 carrinho_produto cp
             INNER JOIN

@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS clientes (
     id_endereco VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
     cpf VARCHAR(20) NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_endereco) REFERENCES enderecos(id));
 
@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS sessions (
     id_cliente VARCHAR(255) NOT NULL,
     token VARCHAR(255) NOT NULL,
     status VARCHAR(10) NOT NULL,
-    created_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_cliente) REFERENCES clientes(id));
 
@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS carrinhos (
     id VARCHAR(255) NOT NULL,
     token VARCHAR(255) NOT NULL,
     status VARCHAR(10) NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
 PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS produtos (
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS produtos (
     categoria VARCHAR(255) NOT NULL,
     desconto INTEGER NOT NULL,
     image_url VARCHAR(255) NULL,
-    created_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
 PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS carrinho_produto (
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS funcionarios (
     email VARCHAR(255) NOT NULL,
     nome VARCHAR(255),
     senha VARCHAR(255) NOT NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
 PRIMARY KEY (id));
 
 CREATE TABLE IF NOT EXISTS compras (
@@ -75,8 +75,8 @@ CREATE TABLE IF NOT EXISTS compras (
     id_endereco_compra VARCHAR(255) NOT NULL,
     id_carrinho VARCHAR(255) NOT NULL,
     qualificacao INTEGER NULL,
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_usuario) REFERENCES clientes(id),
 FOREIGN KEY (id_carrinho) REFERENCES carrinhos(id),
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS comentarios (
     id VARCHAR(255) NOT NULL,
     id_compra VARCHAR(255) NOT NULL,
     texto TEXT NOT NULL,
-    created_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_compra) REFERENCES compras(id));
 
@@ -95,8 +95,8 @@ CREATE TABLE IF NOT EXISTS processos (
     id_compra VARCHAR(255) NOT NULL,
     status ENUM('waiting', 'doing', 'done') NOT NULL DEFAULT 'waiting',
     stage ENUM('inicial', 'preparação', 'embalagem', 'entrega'),
-    created_at DATE NOT NULL,
-    updated_at DATE NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
     id_responsavel VARCHAR(255) NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_compra) REFERENCES compras(id),

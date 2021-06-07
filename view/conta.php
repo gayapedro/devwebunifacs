@@ -14,7 +14,16 @@
       <?php
         foreach($infoConta->getCompras() as $item):
       ?>
-        <p><?php echo $item['updated_at'] ?> - R$<?php echo $item['total'] ?> <a href="./detalhepedido">Ver Mais</a></p>
+        <form action="./detalhepedido" method="post">
+          <input type="hidden" name="idCompra" id="idCompra" value="<?php echo $item['id'] ?>">
+          <p><?php $date = new DateTime($item['updated_at']); echo $date->format('d-m-Y') ?> - R$<?php echo round($item['total'] / 100, 2) ?></p>
+          <button
+              class="btn-primary form-control registerBtn"
+              type="submit"
+              >
+              Ver mais
+          </button>
+        </form>
       <?php endforeach; ?>
     </div>
     <?php include("components/footer.php"); ?>

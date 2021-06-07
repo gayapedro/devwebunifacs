@@ -3,6 +3,7 @@
 require_once(__DIR__."/../../init.php");
 require_once(__DIR__."/../../utils.php");
 require_once(__DIR__."/../endereco/enderecoModel.php");
+require_once(__DIR__."/../carrinho/carrinhoModel.php");
 require_once("clienteInfoModel.php");
 class ClienteDAO{
 
@@ -67,6 +68,19 @@ class ClienteDAO{
                 $array2[] = $row;
             }
 
+            for ($x = 0; $x < count($array2); $x++) {
+                $carrinho = new Carrinho();
+                $carrinho->setId($array2[$x]['id_carrinho']);
+                $products = $carrinho->getCarrinhoProducts();
+
+                $total = 0;
+                foreach($products as $item) {
+                    $total += $item['preco'] * $item['cantidad'];
+                }
+
+                $array2[$x]['total'] = $total;
+            }
+
             $endereco = new Endereco();
             $endereco->setId($array[0]["id_endereco"]);
             $enderecoData = $endereco->getById();
@@ -76,7 +90,7 @@ class ClienteDAO{
 
         return null;
     }
-    
+
     public function getIdEndereco($id) {
 
         $sql = "SELECT id_endereco FROM clientes WHERE id = '$id'";

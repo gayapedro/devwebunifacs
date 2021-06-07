@@ -28,3 +28,5 @@ INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_a
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('bf3504b8-d068-4088-b9b7-0ed3a255bb50', 'Bebidas', 450, 'Fanta laranja 1L', 10, 'https://emporiokaminski.com.br/wp-content/uploads/2020/07/Refrigerante-Fanta-Laranja-2l.jpg', NOW());
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('9a157a89-893e-45ff-a54c-ad86a872d587', 'Bebidas', 485, 'Leite Betania 1L', 0, 'https://hiperideal.vteximg.com.br/arquivos/ids/172311-1000-1000/197820.jpg', NOW());
 INSERT INTO produtos (id, categoria, preco, nome, desconto, image_url, created_at) VALUES ('f88620fd-4023-4582-98b1-bde59b62cfac', 'Bebidas', 285, 'Agua mineral 1L', 5, 'https://trimais.vteximg.com.br/arquivos/ids/1018571-1000-1000/foto_original.jpg', NOW());
+
+INSERT INTO `funcionarios` (`id`, `email`, `nome`, `senha`, `created_at`, `updated_at`) VALUES ('88b9b912-6f67-465b-868f-0e0e708212c1', 'funcionario@compracerta.com.br', 'funcionario 1', '123456', '2021-06-06 23:45:15', '2021-06-06 23:45:15');

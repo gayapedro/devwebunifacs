@@ -84,6 +84,46 @@
 				$controlador = new LogoutController();
 				$controlador->processaRequisicao();
 				break;
+			case "PAGAMENTO":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+ 
+				require "controller/pagamento/PagamentoController.php";
+				$controlador = new PagamentoController();
+				$controlador->processaRequisicao();
+				break;
+			case "CONFIRMACAO":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/confirmacao/ConfirmacaoController.php";
+				$controlador = new ConfirmacaoController();
+				$controlador->processaRequisicao();
+				break;
+			case "ADDITEM":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/carrinho/AddItemController.php";
+				$controlador = new AddItemController();
+				$controlador->addItem();
+				break;
+			case "DETALHEPEDIDO":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/compra/CompraController.php";
+				$controlador = new CompraController();
+				$controlador->getCompraInfo();
+				break;
 			default:
 				if (in_array(strtolower($url), $categoriasList)) {
 					require "controller/produto/initController.php";
