@@ -98,6 +98,7 @@ CREATE TABLE IF NOT EXISTS processos (
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
     id_responsavel VARCHAR(255) NOT NULL,
+    ordem INTEGER NOT NULL,
 PRIMARY KEY (id),
 FOREIGN KEY (id_compra) REFERENCES compras(id),
 FOREIGN KEY (id_responsavel) REFERENCES funcionarios(id));

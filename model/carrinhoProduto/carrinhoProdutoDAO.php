@@ -25,5 +25,14 @@ class CarrinhoProdutoDAO{
         return $stmt->execute();
 
     }
+
+    public function alterCarrinhoProduto($id, $cantidad) {
+
+        $sql = "UPDATE carrinho_produto SET cantidad = $cantidad WHERE id = '$id'";
+
+        console_log($sql);
+
+        return $this->mysqli->query($sql);
+    }
 }
 ?>

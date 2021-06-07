@@ -72,7 +72,8 @@ class CarrinhoDAO{
                 (p.preco - p.preco * p.desconto / 100) as preco,
                 p.image_url,
                 cp.cantidad,
-                cp.id as cp_id
+                cp.id as cp_id,
+                p.id as p_id
             FROM
                 carrinho_produto cp
             INNER JOIN

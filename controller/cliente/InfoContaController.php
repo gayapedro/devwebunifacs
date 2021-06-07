@@ -22,6 +22,8 @@ class InfoContaController{
         $this->cliente->setId($idCliente);
         $infoConta = $this->cliente->getInfoConta();
 
+        console_log($infoConta->getCompras());
+
         require "view/conta.php";
 
     }

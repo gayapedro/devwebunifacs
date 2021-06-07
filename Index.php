@@ -124,6 +124,51 @@
 				$controlador = new CompraController();
 				$controlador->getCompraInfo();
 				break;
+			case "RATE":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				require "controller/compra/CompraController.php";
+				$controlador = new CompraController();
+				$controlador->rate();
+				break;
+			case "RECOMPRA":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+				$host = $_SERVER['HTTP_HOST'];
+				$path = $_SERVER['REQUEST_URI'];
+				$urlCompleta = "http://$host$path";
+
+				$url_components = parse_url($urlCompleta);
+				parse_str($url_components['query'], $params);
+
+				require "controller/compra/RecompraController.php";
+				$controlador = new RecompraController();
+				$controlador->recompra($params['id']);
+				break;
+			case "ALTERITEM":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				$host = $_SERVER['HTTP_HOST'];
+				$path = $_SERVER['REQUEST_URI'];
+				$urlCompleta = "http://$host$path";
+
+				$url_components = parse_url($urlCompleta);
+				parse_str($url_components['query'], $params);
+
+				if (isset($params)) {
+					require "controller/carrinho/AlterItemController.php";
+					$controlador = new AlterItemController();
+					$controlador->alterItem($params['id'], $params['cantidad']);
+				}
+				break;
 			default:
 				if (in_array(strtolower($url), $categoriasList)) {
 					require "controller/produto/initController.php";

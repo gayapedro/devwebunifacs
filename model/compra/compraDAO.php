@@ -33,7 +33,15 @@ class CompraDAO{
     }
 
     public function getIdCompraBy($idUsuario, $idCarrinho) {
-        $sql = "SELECT id FROM compras WHERE id_usuario = '$idUsuario' AND id_carrinho = '$idCarrinho'";
+        $sql = "
+            SELECT compras.id 
+            FROM compras 
+            INNER JOIN processos ON compras.id = processos.id_compra
+            WHERE id_usuario = '$idUsuario' 
+            AND id_carrinho = '$idCarrinho'
+            AND processos.stage = 'inicial'
+            AND processos.status = 'doing'
+        ";
         $result = $this->mysqli->query($sql);
 
         $array = [];
@@ -41,7 +49,13 @@ class CompraDAO{
             $array[] = $row;
         }
 
-        return $array[0]['id'];
+        console_log($array);
+        return count($array) > 0 ? $array[0]['id'] : false;
+    }
+
+    public function rating($id, $qualificacao) {
+        $sql = "UPDATE compras SET qualificacao = $qualificacao WHERE id = '$id'";
+        return $this->mysqli->query($sql);
     }
 
     public function compraInfo($id) {

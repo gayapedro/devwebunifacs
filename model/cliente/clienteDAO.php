@@ -69,6 +69,25 @@ class ClienteDAO{
             }
 
             for ($x = 0; $x < count($array2); $x++) {
+
+                $idCompra = $array2[$x]['id'];
+
+                $sql3 = "SELECT COUNT(*) AS processo FROM processos WHERE id_compra = '$idCompra' AND stage = 'entrega' AND status = 'done'";
+                $result3 = $this->mysqli->query($sql3);
+
+                $array3 = [];
+                while($row = $result3->fetch_array(MYSQLI_ASSOC)){
+                    $array3[] = $row;
+                }
+
+                console_log($array3);
+
+                if ($array3[0]['processo'] > 0){
+                    $array2[$x]['delivered'] = true;
+                } else {
+                    $array2[$x]['delivered'] = false;
+                }
+
                 $carrinho = new Carrinho();
                 $carrinho->setId($array2[$x]['id_carrinho']);
                 $products = $carrinho->getCarrinhoProducts();

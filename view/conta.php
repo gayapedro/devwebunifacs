@@ -3,6 +3,7 @@
 ?>
   <body>
     <?php include("components/nav.php"); ?>
+    <?php include("components/modalAvaliacao.php"); ?>
     <div class="container">
       <h1>Seja bem-vindo, <?php echo $infoConta->getCliente()['nome'] ?>.</h1>
       <h2>Endereço</h2>
@@ -14,16 +15,21 @@
       <?php
         foreach($infoConta->getCompras() as $item):
       ?>
-        <form action="./detalhepedido" method="post">
-          <input type="hidden" name="idCompra" id="idCompra" value="<?php echo $item['id'] ?>">
-          <p><?php $date = new DateTime($item['updated_at']); echo $date->format('d-m-Y') ?> - R$<?php echo round($item['total'] / 100, 2) ?></p>
-          <button
-              class="btn-primary form-control registerBtn"
-              type="submit"
-              >
-              Ver mais
-          </button>
-        </form>
+        <div style="display: flex;">
+          <form action="./detalhepedido" method="post">
+            <input type="hidden" name="idCompra" id="idCompra" value="<?php echo $item['id'] ?>">
+            <p><?php $date = new DateTime($item['updated_at']); echo $date->format('d-m-Y') ?> - R$<?php echo round($item['total'] / 100, 2) ?></p>
+              <button
+                  class="btn-primary form-control registerBtn"
+                  type="submit"
+                  >
+                  Ver mais
+              </button>
+          </form>
+          <?php if($item['delivered']): ?>
+            <button class="btn btn-link" onclick="setModalId('<?php echo $item['id'] ?>')" data-toggle="modal" data-target="#exampleModal" style="margin-left: 30px;">Avalie sua compra</button>
+          <?php endif; ?>
+        </div>
       <?php endforeach; ?>
     </div>
     <?php include("components/footer.php"); ?>

@@ -112,7 +112,7 @@
       <?php endforeach; ?>
       <h2>Total</h2>
       <h3>R$ <?php echo round($compraInfo['total'] / 100, 2) ?></h3>
-      <a href="./recompra">
+      <a href="./recompra?id=<?php echo $compraInfo['id'] ?>">
         <button class="btn btn-primary" type="button">Comprar Novamente</button>
       </a>
     </div>

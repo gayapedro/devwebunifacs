@@ -112,3 +112,19 @@ function hideNovoEndereco() {
   $("#cidade").prop("required", false);
   $("#estado").prop("required", false);
 }
+
+function showUpdateItemAndSetPath(cantidadOriginal, id) {
+  const cantidadAtual = $(`#cantidad_${id}`).val();
+  console.log(`${cantidadAtual} - ${cantidadOriginal}`);
+  if (cantidadOriginal != cantidadAtual) {
+    $(`#btn-${id}`).css("display", "block");
+    $(`#btn-${id}`).attr("href", `./alteritem?id=${id}&cantidad=${cantidadAtual}`);
+
+  } else {
+    $(`#btn-${id}`).css("display", "none");
+  }
+}
+
+function setModalId($id) {
+  $(`#idCompraModal`).val($id);
+}

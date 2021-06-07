@@ -14,8 +14,6 @@ class AddItemController{
 
     public function addItem() {
 
-        console_log("POLLAS");
-
         $this->carrinho->setToken($_COOKIE['token']);
         $currentCarrinho = $this->carrinho->getCarrinho();
 

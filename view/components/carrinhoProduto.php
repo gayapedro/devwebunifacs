@@ -1,3 +1,4 @@
+
 <div class="media">
     <div class="media-left">
     <img
@@ -12,16 +13,15 @@
     <p>
         Preço Unit.: R$ <?php echo round($item['preco'] / 100, 2) ?> Qtd:
         <input
-        onchange="atualizarValorCarrinho()"
+        onchange="showUpdateItemAndSetPath(<?php echo $item['cantidad'] ?>, '<?php echo $item['cp_id'] ?>')"
         type="number"
         value="<?php echo $item['cantidad'] ?>"
+        id="cantidad_<?php echo $item['cp_id'] ?>"
+        name="cantidad_<?php echo $item['cp_id'] ?>"
         />
-    <!-- 
+    </p>
+    <a id="btn-<?php echo $item['cp_id'] ?>" style="display: none;">Atualizar</a>
 
-        TODO: no onchange do input do number fazer que mostre um botao "atualizar"
-        esse botão atualizar pega o id do carrinhoProduto (cp_id) e faz update da quantidade.
-
-    -->
     </p>
     </div>
 </div>

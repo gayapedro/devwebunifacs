@@ -32,6 +32,7 @@ class PagamentoController{
         if ($_POST['endereco'] == "cadastrado") {
             $this->cliente->setId($idCliente);
             $enderecoId = $this->cliente->getEnderecoId();
+
         } else {
 
             $this->endereco->setCEP($_POST['cep']);
@@ -52,7 +53,16 @@ class PagamentoController{
         $this->compra->setIdCarrinho($currentCarrinho['id']);
         $this->compra->setIdUsuario($idCliente);
 
-        $idCompra = $this->compra->criarCompra();
+        console_log("11111111");
+
+        $idCompra = $this->compra->getIdCompra();
+
+
+        console_log($idCompra);
+
+        if (!$idCompra) {
+            $idCompra = $this->compra->criarCompra();
+        }
 
         $this->processo->setIdCompra($idCompra);
         $this->processo->startProcesses();

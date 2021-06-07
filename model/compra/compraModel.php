@@ -87,4 +87,9 @@ class Compra extends CompraDAO
     {
         return $this->getIdCompraBy($this->getIdUsuario(), $this->getIdCarrinho());
     }
+
+    public function rate()
+    {
+        return $this->rating($this->getId(), $this->getQualificacao());
+    }
 }

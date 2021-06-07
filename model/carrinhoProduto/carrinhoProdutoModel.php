@@ -50,4 +50,9 @@ class CarrinhoProduto extends CarrinhoProdutoDAO
     {
         return $this->includeCarrinhoProduto($this->getIdCarrinho(), $this->getIdProduto(), $this->getCantidad());
     }
+
+    public function update()
+    {
+        return $this->alterCarrinhoProduto($this->getId(), $this->getCantidad());
+    }
 }
