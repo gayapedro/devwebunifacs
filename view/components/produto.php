@@ -4,7 +4,7 @@
     <img
         src="<?php echo $item['image_url'] ?>"
         class="media-object"
-        style="height: 80px; width: 80px;"
+        style="height: 80px; width: 80px; object-fit: cover;"
         alt="<?php echo $item["nome"] ?>"
     />
     </div>

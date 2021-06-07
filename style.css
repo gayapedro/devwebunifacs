@@ -21,7 +21,11 @@ footer {
 }
 
 .imgcarr {
-  width: 100vw;
+  position: absolute;
+  height: 450px;
+  width: 450px;
+  object-fit: cover;
+  right: 20%;
 }
 
 .carousel-inner > div {

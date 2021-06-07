@@ -69,9 +69,9 @@
           <div class="form-group">
             <label for="parcelas">Parcelas</label>
             <select required class="form-control" name="parcelas" id="parcelas">
-              <option value="1">1x R$ 200,00</option>
-              <option value="2">2x R$ 105,00</option>
-              <option value="3">3X R$ 75,00</option>
+              <option value="1">1x R$ <?php echo round($total / 100, 2) ?></option>
+              <option value="2">2x R$ <?php echo round($total / 200, 2) ?></option>
+              <option value="3">3X R$ <?php echo round($total / 300, 2) ?></option>
             </select>
           </div>
           <button class="btn btn-primary">Realizar Pagamento</button>

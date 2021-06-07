@@ -49,16 +49,22 @@ class PagamentoController{
         $this->carrinho->setToken($_COOKIE['token']);
         $currentCarrinho = $this->carrinho->getCarrinho();
 
+        $total = 0;
+        $currentCarrinhoProducts = [];
+
+        if (!empty($currentCarrinho)) {
+            $this-> carrinho->setId($currentCarrinho['id']);
+            $currentCarrinhoProducts = $this->carrinho->getCarrinhoProducts();
+            foreach($currentCarrinhoProducts as $item) {
+                $total += $item['preco'] * $item['cantidad'];
+            }
+        }
+
         $this->compra->setIdEnderecoCompra($enderecoId);
         $this->compra->setIdCarrinho($currentCarrinho['id']);
         $this->compra->setIdUsuario($idCliente);
 
-        console_log("11111111");
-
         $idCompra = $this->compra->getIdCompra();
-
-
-        console_log($idCompra);
 
         if (!$idCompra) {
             $idCompra = $this->compra->criarCompra();
