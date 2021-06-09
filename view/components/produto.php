@@ -13,6 +13,7 @@
     <p>Preço Unit.: R$ <?php echo round(($item['preco'] - ($item['preco'] * $item['desconto'] / 100))/100, 2) ?></p>
     <form action="./addItem" method="post">
         <input type="hidden" id="idProduto" name="idProduto" value="<?php echo $item['id'] ?>"/>
+        <?php if (isset($_COOKIE['token'])): ?>
         <input
             type="number"
             id="quantidade"
@@ -23,6 +24,7 @@
         <button id="button1" type="submit" class="btn btn-primary">
             Adicionar ao Carrinho
         </button>
+        <?php endif; ?>
     </form>
     </div>
 </div>

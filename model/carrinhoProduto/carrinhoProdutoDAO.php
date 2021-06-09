@@ -32,5 +32,40 @@ class CarrinhoProdutoDAO{
 
         return $this->mysqli->query($sql);
     }
+
+    public function deleteCarrinhoProduto($id) {
+
+        $sql1 = "SELECT id_carrinho FROM carrinho_produto WHERE id = '$id'";
+
+        $result =  $this->mysqli->query($sql1);
+
+        $array = [];
+        while($row = $result->fetch_array(MYSQLI_ASSOC)){
+            $array[] = $row;
+        }
+
+        $idCarrinho = $array[0]['id_carrinho'];
+
+        $sql2 = "SELECT count(*) as produtos FROM carrinho_produto WHERE id_carrinho = '$idCarrinho'";
+
+        $result2 =  $this->mysqli->query($sql2);
+
+        $array2 = [];
+        while($row = $result2->fetch_array(MYSQLI_ASSOC)){
+            $array2[] = $row;
+        }
+
+        $quantidadeDeProdutos = $array2[0]['produtos'];
+
+        $sql = "DELETE FROM carrinho_produto WHERE id = '$id'";
+        $this->mysqli->query($sql);
+
+        console_log($quantidadeDeProdutos);
+
+        if ((int)$quantidadeDeProdutos == 1) {
+            $sql3 = "UPDATE carrinhos SET status = 'inactive' WHERE id = '$idCarrinho'";
+            $this->mysqli->query($sql3);
+        }
+    }
 }
 ?>

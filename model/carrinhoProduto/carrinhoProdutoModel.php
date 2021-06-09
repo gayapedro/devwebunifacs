@@ -55,4 +55,9 @@ class CarrinhoProduto extends CarrinhoProdutoDAO
     {
         return $this->alterCarrinhoProduto($this->getId(), $this->getCantidad());
     }
+
+    public function remove()
+    {
+        return $this->deleteCarrinhoProduto($this->getId());
+    }
 }

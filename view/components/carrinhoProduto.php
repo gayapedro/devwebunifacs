@@ -20,6 +20,7 @@
         name="cantidad_<?php echo $item['cp_id'] ?>"
         />
     </p>
+    <a id="btn-remove-<?php echo $item['cp_id'] ?>" href="./removeItem?id=<?php echo $item['cp_id'] ?>">Remover</a>
     <a id="btn-<?php echo $item['cp_id'] ?>" style="display: none;">Atualizar</a>
 
     </p>

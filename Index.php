@@ -169,6 +169,26 @@
 					$controlador->alterItem($params['id'], $params['cantidad']);
 				}
 				break;
+
+			case "REMOVEITEM":
+
+				if (!isset($_COOKIE['token'])) {
+					header('Location:home', true,302);
+				}
+
+				$host = $_SERVER['HTTP_HOST'];
+				$path = $_SERVER['REQUEST_URI'];
+				$urlCompleta = "http://$host$path";
+
+				$url_components = parse_url($urlCompleta);
+				parse_str($url_components['query'], $params);
+
+				if (isset($params)) {
+					require "controller/carrinho/RemoveItemController.php";
+					$controlador = new RemoveItemController();
+					$controlador->removeItem($params['id']);
+				}
+				break;
 			default:
 				if (in_array(strtolower($url), $categoriasList)) {
 					require "controller/produto/initController.php";
