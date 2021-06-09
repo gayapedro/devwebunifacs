@@ -68,10 +68,9 @@ class PagamentoController{
 
         if (!$idCompra) {
             $idCompra = $this->compra->criarCompra();
+            $this->processo->setIdCompra($idCompra);
+            $this->processo->startProcesses();
         }
-
-        $this->processo->setIdCompra($idCompra);
-        $this->processo->startProcesses();
 
         require "view/pagamento.php";
     }
